@@ -5,6 +5,7 @@
 // as all the smaller multiples of p will have already been marked at that point. This 
 // means that the algorithm is allowed to terminate in step 4 when p2 is greater than n.[1]"
 
+// Try implementing array with only odd numbers (don't even bother with multiples of 2)
 
 public class SThreaded {
 
@@ -25,7 +26,7 @@ public class SThreaded {
             primes[i] = true;
         }
 
-        // 
+        // Perform sieving operation
         for (int i = 2; i < n; ++i)
         {
             if (primes[i-1]) { 
@@ -59,9 +60,10 @@ public class SThreaded {
     }
 
     // Mark all multiples of num in array as non primes
+    // Need to move to thread class when impementing multithreaded solution
 
     static void markMultiples(int num, int len) {
-        int c = 2*num - 1;
+        int c = (int) Math.pow(num, 2) - 1;
 
         while (c < len) {
             primes[c] = false;
