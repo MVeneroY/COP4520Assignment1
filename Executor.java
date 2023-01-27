@@ -1,19 +1,23 @@
+// Miguel Venero Yupanqui
+// Assignment 1
+// Professor Parra
+// COP4520
+// January 27, 2023
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-// import java.util.concurrent.locks.ReadWriteLock;
-// import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 public class Executor {
   
     static boolean primes[];
-    // static ReadWriteLock lock = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
         long t0 = System.currentTimeMillis();
+
         if (args.length == 0) return;
         int limit = Integer.parseInt(args[0]);
-        primes = new boolean[limit];
 
+        primes = new boolean[limit];
         for (int i = 0; i < limit; ++i) {
             primes[i] = true;
         }
@@ -24,7 +28,6 @@ public class Executor {
             Runnable runnable = new SieveRunnable(i, limit, primes);
             executorService.execute(runnable);
         }
-
         executorService.shutdown();
 
         while (!executorService.isTerminated()) { 
