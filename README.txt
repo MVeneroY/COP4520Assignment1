@@ -3,10 +3,15 @@ Professor Parra
 COP 4520
 January 27, 2023
 
-To compile: $ javac Executor.java 
+To compile: $ javac Runner.java 
 
-to run: $ java Executor n 
-            where n is the input number (ie: 100000000)
+to run: $ java Runner n 
+          where n is the input number (ie: 100000000)
+
+=================================== OR ===================================
+
+To compile and run: $ make all
+
 
 Finally, you need to provide a brief summary of your 
 approach and an informal statement reasoning about the correctness and efficiency of 

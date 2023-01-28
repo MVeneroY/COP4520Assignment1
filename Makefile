@@ -1,10 +1,8 @@
-all: runner.java
-	javac runner.java 
-	java Main
+# Miguel Venero Yupanqui
 
-single: SThreaded.java 
-	javac SThreaded.java 
-	java SThreaded 100000000
+all: Runner.java SieveRunnable.java
+	javac Runner.java 
+	java Runner 100000000
 
 clean: *.class 
 	rm *.class
