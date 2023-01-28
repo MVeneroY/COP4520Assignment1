@@ -9,7 +9,6 @@ public class SieveRunnable implements Runnable {
     private int startingIndex = 0;
     private int limit = 0;
     private boolean primes[];
-    // private long totalTime = 0;
 
     public SieveRunnable(int index, int limit, boolean[] primes) {
         this.startingIndex = index;
@@ -19,14 +18,10 @@ public class SieveRunnable implements Runnable {
 
     @Override
     public void run() {
-        // long t0 = System.currentTimeMillis();
 
         if (primes[startingIndex-1]) {
             markMultiples(startingIndex);
         }
-
-        // long t1 = System.currentTimeMillis();
-        // totalTime = t1 - t0;
     }
 
     
