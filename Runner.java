@@ -62,7 +62,7 @@ public class Runner {
 
         long t1 = System.currentTimeMillis();
 
-        System.out.printf("execution time: %f\n seconds", (t1-t0) / 1000.0);
+        System.out.printf("execution time: %f seconds\n", (t1-t0) / 1000.0);
         System.out.printf("%d primes found\n", count);
         System.out.printf("sum of all primes found: %d\n", sum);
 
