@@ -13,9 +13,7 @@ to run: $ java Runner n
 To compile and run: $ make all
 
 
-Finally, you need to provide a brief summary of your 
-approach and an informal statement reasoning about the correctness and efficiency of 
-your design. Provide a summary of the experimental evaluation of your approach. 
+---------------------------------------------------------------------------
 
 The approach I used consisted on keeping an array of booleans that would represent whether
 a number is prime or not. I started with the assumption that all numbers are prime unless 
