@@ -1,63 +1,58 @@
-import java.lang.Thread.State;
+// Miguel Venero Yupanqui
+// Assignment 1
+// Professor Parra
+// COP4520
+// January 27, 2023
 
-public class Runner {
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class Executor {
+  
+    static boolean primes[];
 
     public static void main(String[] args) {
-
         long t0 = System.currentTimeMillis();
-        
-        boolean primes[];
-        long count = 0;
-        long sum = 0;
-        int tenMaxPrimes[] = new int[10]; 
 
+        if (args.length == 0) return;
         int limit = Integer.parseInt(args[0]);
-        primes = new boolean[limit];
 
+        primes = new boolean[limit];
         for (int i = 0; i < limit; ++i) {
             primes[i] = true;
         }
+        
+        ExecutorService executorService = Executors.newFixedThreadPool(8);
 
-        // start jobs here
-        int threadc = 8;
-        SieveThread threads[] = new SieveThread[threadc];
-        for (int i = 0; i < threadc; ++i) {
-            threads[i] = new SieveThread();
-            threads[i].setValues(i+2, limit, primes);
-            // System.out.println(threads[i].getState());
-            threads[i].start();
+        for (int i = 2; i < (int) Math.sqrt(limit)+1; ++i) {
+            Runnable runnable = new SieveRunnable(i, limit, primes);
+            executorService.execute(runnable);
         }
+        executorService.shutdown();
 
-        // SieveThread t = new SieveThread();
-        // t.setValues(2, limit, primes);
-        // t.start();
-        // boolean done = false;
-        while (true) {
+        while (!executorService.isTerminated()) { 
             try {
                 Thread.sleep(100);
-                boolean done = true;
-                for (int i = 0; i < threadc; ++i) {
-                    if (threads[i].getState() != State.TERMINATED)
-                        done = false;
-                }
-                if (done) break;
             } catch (InterruptedException e) {
                 System.out.println(e);
             }
         }
 
-
+        long count = 0;
+        long sum = 0;
         for (int i = 1; i < limit; ++i) {
             if (primes[i]) {
                 count++;
                 sum += i+1;
             }
         }
+
+        int maxTenPrimes[] = new int[10];
         int temp = 0;
         int tenIndex = 0;
         for (int i = 0; i < limit; ++i) {
             if (primes[i] && count - temp < 10) {
-                tenMaxPrimes[tenIndex] = i+1;
+                maxTenPrimes[tenIndex] = i+1;
                 tenIndex++;
             }
             if (primes[i]) {
@@ -72,7 +67,7 @@ public class Runner {
         System.out.printf("sum of all primes found: %d\n", sum);
 
         for (int i = 0; i < 10; ++i)
-            System.out.printf("%10d", tenMaxPrimes[i]);
+            System.out.printf("%10d", maxTenPrimes[i]);
         System.out.println();
     }
 }
